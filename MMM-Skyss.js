@@ -222,9 +222,15 @@ Module.register("MMM-Skyss",{
                     timestamp = journey.AimedTime;
                 }
                 
+                var stopName = stop.PlaceDescription ? stop.PlaceDescription : stop.Description;
+                
+                if (self.config.maxNameLength) {
+                    stopName = stopName.substring(0, self.config.maxNameLength);
+                }
+                
                 allStopItems.push({
                     stopId: journey.StopIdentifier,
-                    stopName: stop.PlaceDescription,
+                    stopName: stopName,
                     lineName: journey.RoutePublicIdentifier,
                     destinationName: journey.TripDestination,
                     service: stop.ServiceModes[0],
